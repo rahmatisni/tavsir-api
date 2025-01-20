@@ -605,14 +605,14 @@ class TravShopController extends Controller
         try {
             $credentials = base64_decode(substr($authorizationHeader, 6));
 
-            // [$username, $password] = explode(':', $credentials, 2);
-            // $validUsername = env('usr_flo'); // Contoh username valid
-            // $validPassword = env('pwd_flo'); // Contoh password valid
+            [$username, $password] = explode(':', $credentials, 2);
+            $validUsername = env('usr_flo'); // Contoh username valid
+            $validPassword = env('pwd_flo'); // Contoh password valid
 
-            // if ($username !== $validUsername || $password !== $validPassword) {
-            //     return response()->json(['message' => 'Invalid credentials.'], 401)
-            //         ->header('WWW-Authenticate', 'Basic realm="Access to the API"');
-            // }
+            if ($username !== $validUsername || $password !== $validPassword) {
+                return response()->json(['message' => 'Invalid credentials.'], 401)
+                    ->header('WWW-Authenticate', 'Basic realm="Access to the API"');
+            }
             $validator = Validator::make($request->all(), [
                 'customer_name' => 'required|string',
                 'customer_phone' => 'required|string',
