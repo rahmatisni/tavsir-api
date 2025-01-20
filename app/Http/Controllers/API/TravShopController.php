@@ -595,7 +595,6 @@ class TravShopController extends Controller
     {
 
         $authorizationHeader = $request->header('Authorization');
-        dd($authorizationHeader);
         // Jika Basic Auth tidak ditemukan
         if (!$authorizationHeader || !str_starts_with($authorizationHeader, 'Basic ')) {
             return response()->json(['message' => 'Authorization header is missing or invalid.'], 401);
@@ -610,6 +609,7 @@ class TravShopController extends Controller
             $validUsername = env('usr_flo'); // Contoh username valid
             $validPassword = env('pwd_flo'); // Contoh password valid
 
+            dd($validUsername, $validPassword);
             if ($username !== $validUsername || $password !== $validPassword) {
                 return response()->json(['message' => 'Invalid credentials.'], 401)
                     ->header('WWW-Authenticate', 'Basic realm="Access to the API"');
