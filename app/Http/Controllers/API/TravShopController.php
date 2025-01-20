@@ -595,6 +595,7 @@ class TravShopController extends Controller
     {
 
         $authorizationHeader = $request->header('Authorization');
+        dd($authorizationHeader);
         // Jika Basic Auth tidak ditemukan
         if (!$authorizationHeader || !str_starts_with($authorizationHeader, 'Basic ')) {
             return response()->json(['message' => 'Authorization header is missing or invalid.'], 401);
