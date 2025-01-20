@@ -609,7 +609,6 @@ class TravShopController extends Controller
             $validUsername = env('usr_flo'); // Contoh username valid
             $validPassword = env('pwd_flo'); // Contoh password valid
 
-            dd($validUsername);
             if ($username !== $validUsername || $password !== $validPassword) {
                 return response()->json(['message' => 'Invalid credentials.'], 401)
                     ->header('WWW-Authenticate', 'Basic realm="Access to the API"');
