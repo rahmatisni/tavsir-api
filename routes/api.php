@@ -288,7 +288,7 @@ Route::prefix('travshop')->group(function () {
     Route::post('/order-confirmation/{id}', [App\Http\Controllers\API\TravShopController::class, 'orderConfirm']);
     Route::post('/order-cancel/{id}', [App\Http\Controllers\API\TravShopController::class, 'orderCancel']);
     Route::get('/payment-method', [App\Http\Controllers\API\TravShopController::class, 'paymentMethod']);
-    Route::post('/create-payment/{id}', [App\Http\Controllers\API\TravShopController::class, 'createPayment']);
+    // Route::post('/create-payment/{id}', [App\Http\Controllers\API\TravShopController::class, 'createPayment']);
     Route::get('/payment-order/{id}', [App\Http\Controllers\API\TravShopController::class, 'paymentByOrderId']);
     // Route::get('/payment-status/{id}', [App\Http\Controllers\API\TravShopController::class, 'statusPayment']);
 
@@ -317,6 +317,12 @@ Route::prefix('travshop')->group(function () {
 // Route::middleware('customRateLimit:key,1,5')->group(function () {
 //     Route::get('/travshop/payment-status/{id}', [App\Http\Controllers\API\TravShopController::class, 'statusPayment']);
 // });
+
+// ratelimit
+Route::middleware('customRateLimit:key,1,5')->group(function () {
+    Route::post('/travshop/create-payment/{id}', [App\Http\Controllers\API\TravShopController::class, 'createPayment']);
+});
+
 
 Route::get('/travshop/payment-status/{id}', [App\Http\Controllers\API\TravShopController::class, 'statusPayment']);
 
