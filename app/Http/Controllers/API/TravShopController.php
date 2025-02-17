@@ -1293,6 +1293,7 @@ class TravShopController extends Controller
                 }
             }
 
+            $beforePayId = $data->payment_method_id;
             $data->payment_method_id = $request->payment_method_id;
 
             $res = 'Invalid';
@@ -1321,6 +1322,17 @@ class TravShopController extends Controller
                 }
             }
 
+
+            if($payment_method->id === $beforePayId){
+                $wrapData = [
+                    "status" => "success",
+                    "rc" => "0000",
+                    "rcm" => "success",
+                    "responseData" => $data->payment->data
+                ];
+                return response()->json($wrapData);
+
+            }
             $paymentResult = $this->servicePayment->create($payment_method, $data, $request->all());
             $payment_payload = $paymentResult->data;
 
